@@ -22,13 +22,6 @@ def save_uploaded_csv_file(file):
     
     return file_name
 
-# def read_csv_file(csv_file):
-
-#     temp_dir = "temp_csv_uploads"
-#     os.makedirs(temp_dir,exist_ok =True)
-
-#     return csv_file
-
 def get_csv_summary(filename):
     
     lida1 = Manager(text_gen = llm("openai",api_key = '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'))
@@ -45,14 +38,8 @@ def get_goals(filename):
 def get_visualization(filename,query):
     lida1 = Manager(text_gen = llm("openai",api_key = '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'))
     textgen_config = TextGenerationConfig(n=1,temperature=0.7,model='gpt-3.5-turbo',use_cache=True)
-    #filename = 'C:\practice\project-lida\iris.csv'
+
     summary = lida1.summarize(filename,textgen_config=textgen_config)
 
     charts = lida1.visualize(summary=summary, goal=query,textgen_config=textgen_config)
-    #os.remove(filename)
     return charts
-
-
-# query = 'Histogram of sepal length'
-# charts = get_visualization(filename,query)
-# print(plot_raster(charts[0].raster))
